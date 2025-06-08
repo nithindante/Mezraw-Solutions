@@ -7,7 +7,6 @@ import FadeinSection from './FadeinSection';
 import { Link } from 'react-router';
 
 function Header() {
-    const headerArray = ['Home', 'About us', 'Fresh', 'Brands', 'Contact us'];
         const headerItems = [
         { name: 'Home', path: '/' },
         { name: 'About us', path: '/about' },
@@ -41,7 +40,7 @@ function Header() {
     return (
         <div className="relative w-full" ref={menuRef}>
             <div className="header-container grid [grid-template-columns:1fr_0.2fr] lg:[grid-template-columns:0.5fr_1fr]">
-                <Link to={'/'} className="cursor-pointer no-underline hover:no-underline"><h3 className='!no-underline hover:!no-underline font-sans justify-center flex-auto header-div text-white'>Mezraw Solutions</h3></Link>
+                <Link to={'/'} className="cursor-pointer !no-underline !hover:no-underline flex items-center"><h3 className='!no-underline hover:!no-underline font-sans justify-center flex-auto header-div text-white'>Mezraw Solutions</h3></Link>
                 
                 {isSmallScreen ? (
                     <div className='flex justify-center items-center'>
