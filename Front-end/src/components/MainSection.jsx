@@ -13,7 +13,6 @@ function MainSection() {
         <MoreSection></MoreSection>
         <ReviewSection></ReviewSection>
         <ArticleSection></ArticleSection>
-        <FooterSection></FooterSection>
     </div>
   )
 }

@@ -5,6 +5,7 @@ import Button from 'react-bootstrap/Button';
 import Header from './components/Header';
 import MainSection from './components/MainSection';
 import ContactUs from './components/ContactUs';
+import FooterSection from './components/FooterSection';
 function App() {
 
 
@@ -20,6 +21,7 @@ function App() {
              <Route path="/contact" element={<ContactUs />} />
              </Routes>
       </div>
+              <FooterSection></FooterSection>
     </div>
     </Router> 
   )
