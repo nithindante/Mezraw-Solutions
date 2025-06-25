@@ -13,8 +13,8 @@ function ContactUs() {
           <span>+91 9080906366, 7012013993</span>
         </div>
         <div>
-          <h3 className='mb-4'>Address</h3>
-          <span>Door No.1 , Ground Floor, Pragna Uptown, Doddathoguru, Electronic City Phase 1, Bangalore- 560100</span>
+          <h3 className='mb-4'>Office Address</h3>
+          <span>7/1627, Crasent House, Pereppadam Road,Vennala, Kochi, Ernakulam, Kerala, 682028</span>
         </div>
         <div>
           <h3 className='mb-4'>Opening hours</h3>
