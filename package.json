@@ -1,5 +1,9 @@
 {
   "dependencies": {
-    "@vis.gl/react-google-maps": "^1.5.3"
+    "@vis.gl/react-google-maps": "^1.5.3",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.0",
+    "express": "^5.1.0",
+    "nodemailer": "^7.0.3"
   }
 }
