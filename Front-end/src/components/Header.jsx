@@ -12,6 +12,9 @@ function Header() {
         { name: 'About us', path: '/about' },
         { name: 'Fresh', path: '/fresh' },
         { name: 'Brands', path: '/brands' },
+        { name:'Dehydrated Vegetables', path: '/dehydrated-vegetables' },
+        { name:'Spices', path: '/spices' },
+        { name:"Processed",path:'/processed'},
         { name: 'Contact us', path: '/contact' }
     ];
     const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
@@ -50,12 +53,12 @@ function Header() {
                         </span>
                     </div>
                 ) : null}
-                <div className='hidden lg:flex gap-[5rem] justify-center items-center'>
+                <div className='hidden lg:flex gap-12 justify-center items-center flex-wrap'>
                     {headerItems.map((item, index) => (
                         <Link
                             key={index}
                             to={item.path}
-                            className='cursor-pointer text-white underline-offset-8 hover:!text-green-500 transition-colors duration-300'
+                            className='cursor-pointer text-white no-underline hover:!text-green-500 transition-colors duration-300 whitespace-nowrap text-base font-bold'
                         >
                             {item.name}
                         </Link>

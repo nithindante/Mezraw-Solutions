@@ -6,6 +6,9 @@ import Header from './components/Header';
 import MainSection from './components/MainSection';
 import ContactUs from './components/ContactUs';
 import FooterSection from './components/FooterSection';
+import Fresh from './components/Fresh';
+import DehydratedVegetables from './components/DehydratedVegetables';
+import Spices from './components/Spices'
 function App() {
 
 
@@ -19,6 +22,9 @@ function App() {
         <Routes>
              <Route path="/" element={<MainSection />} />
              <Route path="/contact" element={<ContactUs />} />
+             <Route path='/fresh' element={<Fresh></Fresh>}/>
+             <Route path='/dehydrated-vegetables' element={<DehydratedVegetables></DehydratedVegetables>}/>
+             <Route path='/spices' element={<Spices></Spices>}></Route>
              </Routes>
       </div>
               <FooterSection></FooterSection>
