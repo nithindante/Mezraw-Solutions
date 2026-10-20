@@ -1,12 +1,14 @@
 import React from 'react'
-import { motion } from "framer-motion";
+import { motion, useReducedMotion } from "framer-motion";
 
-function FadeinSection({ children, delay = 0  }) {
+function FadeinSection({ children, delay = 0, className }) {
+  const reduceMotion = useReducedMotion();
   return (
     <motion.div
-      initial={{ opacity: 0, y: 30 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.6, ease: "easeOut", delay }}
+      className={className}
+      initial={{ opacity: 0, transform: reduceMotion ? 'none' : 'translateY(16px)' }}
+      whileInView={{ opacity: 1, transform: 'translateY(0px)' }}
+      transition={{ duration: 0.5, ease: [0.23, 1, 0.32, 1], delay }}
       viewport={{ once: true, amount: 0.2 }}
     >
       {children}

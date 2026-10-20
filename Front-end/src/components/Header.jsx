@@ -1,100 +1,100 @@
-import React, { useRef, useEffect } from 'react';
-import '../styles/Header.css';
+import React, { useRef, useEffect, useState } from 'react';
 import hamburgerIcon from '../assets/hamburger.svg';
 import closeIcon from '../assets/close.svg';
-import { useMediaQuery } from 'react-responsive';
-import FadeinSection from './FadeinSection';
-import { Link } from 'react-router';
+import { Link, NavLink } from 'react-router';
+
+const headerItems = [
+    { name: 'Home', path: '/' },
+    { name: 'About us', path: '/about' },
+    { name: 'Fresh', path: '/fresh' },
+    { name: 'Brands', path: '/brands' },
+    { name: 'Dehydrated Vegetables', path: '/dehydrated-vegetables' },
+    { name: 'Spices', path: '/spices' },
+    { name: 'Processed', path: '/processed' },
+    { name: 'Contact us', path: '/contact' }
+];
 
 function Header() {
-        const headerItems = [
-        { name: 'Home', path: '/' },
-        { name: 'About us', path: '/about' },
-        { name: 'Fresh', path: '/fresh' },
-        { name: 'Brands', path: '/brands' },
-        { name:'Dehydrated Vegetables', path: '/dehydrated-vegetables' },
-        { name:'Spices', path: '/spices' },
-        { name:"Processed",path:'/processed'},
-        { name: 'Contact us', path: '/contact' }
-    ];
-    const isSmallScreen = useMediaQuery({ maxWidth: 1024 });
-    const [displayItems, setDisplayItems] = React.useState(false);
+    const [menuOpen, setMenuOpen] = useState(false);
     const menuRef = useRef(null);
-    function showDisplayItems() {
-        setDisplayItems(!displayItems);
-    }
-    // Close menu when clicking outside
+
+    // Close menu when clicking outside or pressing Escape
     useEffect(() => {
         function handleClickOutside(event) {
-
             if (menuRef.current && !menuRef.current.contains(event.target)) {
-                setDisplayItems(false);
+                setMenuOpen(false);
             }
+        }
+        function handleKeyDown(event) {
+            if (event.key === 'Escape') setMenuOpen(false);
         }
 
         document.addEventListener("mousedown", handleClickOutside);
+        document.addEventListener("keydown", handleKeyDown);
         return () => {
             document.removeEventListener("mousedown", handleClickOutside);
+            document.removeEventListener("keydown", handleKeyDown);
         };
-    }, [menuRef]);
-
-
+    }, []);
 
     return (
-        <div className="relative w-full" ref={menuRef}>
-            <div className="header-container grid [grid-template-columns:1fr_0.2fr] lg:[grid-template-columns:0.5fr_1fr]">
-                <Link to={'/'} className="cursor-pointer !no-underline !hover:no-underline flex items-center"><h3 className='!no-underline hover:!no-underline font-sans justify-center flex-auto header-div text-white'>Mezraw Solutions</h3></Link>
-                
-                {isSmallScreen ? (
-                    <div className='flex justify-center items-center'>
-                        <span onClick={() => showDisplayItems(event)} className="cursor-pointer" >
-                            <img src={displayItems ? closeIcon: hamburgerIcon} alt="Menu" className="w-8 h-8 cursor-pointer"  />
-                            
-                        </span>
-                    </div>
-                ) : null}
-                <div className='hidden lg:flex gap-12 justify-center items-center flex-wrap'>
-                    {headerItems.map((item, index) => (
-                        <Link
-                            key={index}
+        <header className="relative w-full bg-header text-white" ref={menuRef}>
+            <div className="mx-auto flex max-w-7xl items-center justify-between gap-6 px-5 py-3 sm:px-8">
+                <Link to="/" className="font-display text-lg font-bold text-white no-underline sm:text-xl">
+                    Mezraw Solutions
+                </Link>
+
+                <nav aria-label="Main" className="hidden items-center gap-8 xl:flex">
+                    {headerItems.map((item) => (
+                        <NavLink
+                            key={item.path}
                             to={item.path}
-                            className='cursor-pointer text-white no-underline hover:!text-green-500 transition-colors duration-300 whitespace-nowrap text-base font-bold'
+                            end
+                            className={({ isActive }) =>
+                                `whitespace-nowrap text-base font-semibold no-underline transition-colors duration-150 ease-out [@media(hover:hover)]:hover:text-brand-light ${isActive ? 'text-brand-light' : 'text-white'}`
+                            }
                         >
                             {item.name}
-                        </Link>
+                        </NavLink>
                     ))}
-                </div>
-            </div>
+                </nav>
 
-            {/* Top-Down Sliding Menu */}
-            <div
-
-                className={`fixed top-15 left-0 w-full bg-[#444040] z-50 flex flex-col gap-4 py-8 px-6 
-                    transform transition-all duration-300 ease-in-out
-                    ${displayItems ? 'translate-y-0' : '-translate-y-full'}`}
-            >
-                {/* Close button */}
                 <button
-                    onClick={showDisplayItems}
-                    className="absolute top-4 right-4 text-white text-2xl"
+                    type="button"
+                    onClick={() => setMenuOpen((open) => !open)}
+                    aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+                    aria-expanded={menuOpen}
+                    aria-controls="mobile-menu"
+                    className="-mr-2 flex size-11 cursor-pointer items-center justify-center transition-transform duration-150 ease-out-strong active:scale-95 xl:hidden"
                 >
-                    &times;
+                    <img src={menuOpen ? closeIcon : hamburgerIcon} alt="" className="size-7" />
                 </button>
-
-                {/* Menu items */}
-                <div className="flex flex-col items-center mt-8">
-                    {headerItems.map((item, index) => (
-                        <Link
-                            key={index}
-                            to={item.path}
-                            className='cursor-pointer text-white text-lg py-3 w-full text-right border-b border-gray-700 hover:!text-green-500 transition-colors duration-300'
-                        >
-                            {item.name}
-                        </Link>
-                    ))}
-                </div>
             </div>
-        </div>
+
+            {/* Dropdown menu, small screens only */}
+            <nav
+                id="mobile-menu"
+                aria-label="Main"
+                aria-hidden={!menuOpen}
+                className={`absolute inset-x-0 top-full z-50 flex max-h-[calc(100dvh-4rem)] flex-col overflow-y-auto bg-header px-5 pb-6 pt-2 shadow-lg xl:hidden
+                    transition-[transform,opacity,visibility] duration-200 ease-out-strong
+                    ${menuOpen ? 'visible translate-y-0 opacity-100' : 'invisible -translate-y-2 opacity-0'}`}
+            >
+                {headerItems.map((item) => (
+                    <NavLink
+                        key={item.path}
+                        to={item.path}
+                        end
+                        onClick={() => setMenuOpen(false)}
+                        className={({ isActive }) =>
+                            `flex min-h-12 items-center py-2 text-lg font-medium no-underline transition-colors duration-150 ease-out [@media(hover:hover)]:hover:text-brand-light ${isActive ? 'text-brand-light' : 'text-white'}`
+                        }
+                    >
+                        {item.name}
+                    </NavLink>
+                ))}
+            </nav>
+        </header>
     );
 }
 

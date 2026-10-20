@@ -22,38 +22,41 @@ function ContactForm() {
       alert('Error: ' + data.error);
     }
   };
+  const field = "block w-full min-h-13 rounded-lg bg-paper px-4 py-3 text-base text-ink placeholder-neutral-500 transition-shadow duration-150 ease-out focus:outline-none focus:ring-2 focus:ring-ink";
+  const notch = "absolute size-7 rounded-full bg-paper";
   return (
-    <div className='p-10 max-w-[700px] mx-auto flex flex-col items-center justify-center gap-8'>
-        <h1 className='text-center !text-[63px] !font-bold' style={{fontFamily:'Roboto'}}>Contact us</h1>
-        <p className='text-[24px]'>Feel free to contact us with any questions or concerns. You can use the form on our website or email us directly. We appreciate your interest and look forward to hearing from you.</p>
-        
+    <section className='mx-auto max-w-5xl px-5 py-14 sm:px-8 sm:py-20'>
+      {/* Coupon: notches and a dotted perforation split the card into heading and form */}
+      <div className='relative overflow-hidden rounded-2xl bg-brand text-white md:grid md:grid-cols-[46fr_54fr]'>
+        <span aria-hidden='true' className={`${notch} -top-3.5 left-[46%] hidden -translate-x-1/2 md:block`} />
+        <span aria-hidden='true' className={`${notch} -bottom-3.5 left-[46%] hidden -translate-x-1/2 md:block`} />
 
-<form className="w-full  flex items-center flex-col gap-4" onSubmit={handleSubmit}>
-      <div className="w-full">
-    <label  className="block mb-2 text-sm font-medium text-black dark:text-black">Name*</label>
-    <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" placeholder="Your Name" required />
-  </div>
-  <div className="w-full">
-    <label  className="block mb-2 text-sm font-medium text-black dark:text-black">Email*</label>
-    <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} className="bg-white border border-gray-300 text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 placeholder-gray-400" placeholder="Your Email" required />
-  </div>
-  <div className="w-full">
-    <label  className="block mb-2 text-sm font-medium text-black dark:text-black">Message*</label>
-   <textarea id="message" rows="4" value={message} onChange={e => setMessage(e.target.value)} className="block p-2.5 w-full text-sm text-gray-900 bg-white rounded-lg border border-gray-300 focus:ring-blue-500 focus:border-blue-500 placeholder-gray-400" placeholder="Enter your Message" required></textarea>
-  </div>
-  <button type="submit" className="        bg-black
-        text-white
-  uppercase 
-  py-3 px-10 
-  !rounded-3xl
-  transition-all 
-  duration-300 
-  hover:!bg-white 
-  hover:!text-black
-  focus:outline-none">Submit</button>
-</form>
+        <div className='flex flex-col justify-between gap-8 p-6 sm:p-10 md:p-12'>
+          <h1 className='text-section font-bold'>Contact us</h1>
+          <p className='text-base leading-relaxed sm:text-lg'>Feel free to contact us with any questions or concerns. You can use the form on our website or email us directly. We appreciate your interest and look forward to hearing from you.</p>
+        </div>
 
-    </div>
+        <form
+          className='relative flex flex-col gap-3 border-t-[5px] border-dotted border-paper p-6 sm:p-10 md:border-l-[5px] md:border-t-0 md:p-12'
+          onSubmit={handleSubmit}
+        >
+          <span aria-hidden='true' className={`${notch} -left-3.5 -top-[17px] md:hidden`} />
+          <span aria-hidden='true' className={`${notch} -right-3.5 -top-[17px] md:hidden`} />
+          <label htmlFor="name" className="sr-only">Name</label>
+          <input type="text" id="name" value={name} onChange={e => setName(e.target.value)} className={field} placeholder="Your Name*" required />
+          <label htmlFor="email" className="sr-only">Email</label>
+          <input type="email" id="email" value={email} onChange={e => setEmail(e.target.value)} className={field} placeholder="Your Email*" required />
+          <label htmlFor="message" className="sr-only">Message</label>
+          <textarea id="message" rows="4" value={message} onChange={e => setMessage(e.target.value)} className={field} placeholder="Enter your Message*" required></textarea>
+          <button
+            type="submit"
+            className="mt-2 min-h-14 w-full cursor-pointer rounded-lg bg-ink text-sm font-semibold uppercase text-white transition-[transform,background-color] duration-150 ease-out-strong active:scale-[0.98] [@media(hover:hover)]:hover:bg-black"
+          >
+            Submit
+          </button>
+        </form>
+      </div>
+    </section>
   )
 }
 

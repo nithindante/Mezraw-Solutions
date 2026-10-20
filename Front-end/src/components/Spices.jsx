@@ -1,4 +1,5 @@
 import React from "react";
+import FadeinSection from "./FadeinSection";
 import cardamomImg from "../assets/elachi.avif";
 import cloveImg from "../assets/clove.avif";
 import pepperImg from "../assets/pepper.avif";
@@ -28,17 +29,19 @@ const spices = [
 ];
 
 const Spices = () => (
-  <div className="w-full min-h-screen flex flex-col items-center bg-white pb-20">
-    <h1 className="!text-[58px] text-9xl md:text-9xl font-extrabold text-center mt-16 mb-16 py-20">The Kerala Spice Boat</h1>
-    <div className="w-full max-w-4xl flex flex-col gap-16 px-4 md:px-0">
+  <div className="flex min-h-screen w-full flex-col items-center bg-paper px-5 pb-20 sm:px-8">
+    <h1 className="mx-auto max-w-4xl py-14 text-center text-hero font-extrabold sm:py-20">The Kerala Spice Boat</h1>
+    <div className="flex w-full max-w-4xl flex-col gap-14">
       {spices.map((item, idx) => (
-        <div key={idx} className="flex flex-col md:flex-row items-center md:items-start gap-8">
-          <img src={item.img} alt={item.title} className="w-full md:w-72 h-56 object-cover mb-4 md:mb-0" />
-          <div className="flex-1">
-            <h3 className="font-extrabold text-lg md:text-xl mb-2 text-left">{item.title}</h3>
-            <div className="text-base text-black leading-snug text-left">{item.desc}</div>
+        <FadeinSection key={idx}>
+          <div className="flex flex-col items-start gap-6 md:flex-row md:gap-8">
+            <img src={item.img} alt={item.title} loading="lazy" className="aspect-[4/3] w-full rounded-xl object-cover md:aspect-auto md:h-56 md:w-72 md:shrink-0" />
+            <div className="flex-1">
+              <h3 className="mb-2 text-xl font-bold">{item.title}</h3>
+              <p className="text-base leading-relaxed text-muted">{item.desc}</p>
+            </div>
           </div>
-        </div>
+        </FadeinSection>
       ))}
     </div>
   </div>
